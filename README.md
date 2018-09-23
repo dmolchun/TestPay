@@ -1,7 +1,8 @@
 # TestPay
 The TestPay Sandbox
 
-Environment setup
+# Environment setup
+
 1. Edit etc\hosts. Add
 
    <application_server_ip> - api.testpay.com 
