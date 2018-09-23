@@ -1,0 +1,8 @@
+security:
+  require-ssl: true
+server:
+  port: 443
+  ssl:
+    key-store: classpath:keystore.jsk
+    key-store-password: keystore_pass
+    key-password: key_pass
