@@ -19,7 +19,7 @@ The TestPay Sandbox
 -u "user:password" \\ \
 -d "grant_type=client_credentials"
 
-3. Sample payment request
+3. Sample payment request \
 curl -v https://api.testpay.com/payments/payment \\ \
 -H "Content-Type: application/json" \\ \
 -H "Authorization: Bearer 65130d3b-544c-45f3-9497-ad8b16ab39b6" \\ \
