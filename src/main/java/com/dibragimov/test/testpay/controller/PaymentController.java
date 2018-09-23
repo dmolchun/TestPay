@@ -19,7 +19,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
+import java.util.Base64;
 import java.util.UUID;
 
 @RestController
@@ -67,7 +67,8 @@ public class PaymentController {
         try {
 
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            secret = Arrays.toString(digest.digest(secret.getBytes(StandardCharsets.UTF_8)));
+            byte[] hash = digest.digest(secret.getBytes(StandardCharsets.UTF_8));
+            secret = Base64.getEncoder().encodeToString(hash);
         } catch (NoSuchAlgorithmException e) {
             logger.error("Error generating sha-256 hash for {}", secret);
         }
