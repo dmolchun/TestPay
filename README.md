@@ -13,3 +13,5 @@ The TestPay Sandbox
    
    sudo update-ca-certificates
 
+# Additional
+1. Payer e-mail is used as secret for sha2 signature for webhook
