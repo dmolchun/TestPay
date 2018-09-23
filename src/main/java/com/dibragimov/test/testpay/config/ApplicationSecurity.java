@@ -20,7 +20,7 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
         http
                 .requestMatchers()
-                .antMatchers("/oauth/**")
+                .antMatchers("/oauth2/**")
                 .and()
                 .authorizeRequests()
                 .anyRequest().authenticated()

@@ -6,7 +6,6 @@ import com.dibragimov.test.testpay.dto.State;
 import com.dibragimov.test.testpay.dto.Transaction;
 import com.dibragimov.test.testpay.webhook.WebhookSender;
 import com.dibragimov.test.testpay.webhook.db.WebhookHolder;
-import com.dibragimov.test.testpay.webhook.db.WebhookRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -18,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.UUID;
 
@@ -35,8 +36,9 @@ public class PaymentController {
     @PostMapping(value = "/payments/payment", consumes = {"application/json"})
     public PaymentResponse makePayment(@RequestBody Payment payment) {
         logger.info("Make payment request {}", payment);
-        sender.sendWebhook(buildWebhook(payment));
-        return new PaymentResponse(payment.getNotificationUrl(), "12", State.CREATED);
+        WebhookHolder holder = buildWebhook(payment);
+        sender.sendWebhook(holder);
+        return new PaymentResponse(holder.getId(), getFormattedNow(), State.CREATED);
     }
 
     /**
@@ -70,6 +72,12 @@ public class PaymentController {
             logger.error("Error generating sha-256 hash for {}", secret);
         }
         holder.setSha2sig(secret);
+    }
+
+    private String getFormattedNow() {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        return now.format(formatter);
     }
 
 }

@@ -37,6 +37,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(final AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints
+                .pathMapping("/oauth/token", "/oauth2/token")
                 .tokenStore(new InMemoryTokenStore())
                 .authenticationManager(authenticationManager);
     }

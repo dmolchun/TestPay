@@ -1,0 +1,14 @@
+{
+  "intent": "order",
+  "notification_url": "https://example.com/your_notification_url",
+  "payer": {
+    "email": "test@example.com"
+  },
+  "transaction": {
+    "external_id": "123456789",
+    "amount": {
+      "currency": "USD"
+    },
+    "description": "The payment transaction description"
+  }
+}

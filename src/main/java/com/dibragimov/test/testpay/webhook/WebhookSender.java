@@ -3,13 +3,11 @@ package com.dibragimov.test.testpay.webhook;
 import com.dibragimov.test.testpay.dto.WebhookJson;
 import com.dibragimov.test.testpay.webhook.db.WebhookHolder;
 import com.dibragimov.test.testpay.webhook.db.WebhookRepository;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
@@ -17,7 +15,7 @@ import java.util.Arrays;
 @Service
 public class WebhookSender {
 
-    private static final Logger logger = LoggerFactory.getLogger(SheduledWebhookSender.class);
+    private static final Logger logger = LoggerFactory.getLogger(ScheduledWebhookSender.class);
     private static final int MAX_COUNT = 25;
 
     private WebhookRepository repository;
@@ -75,7 +73,7 @@ public class WebhookSender {
                     restTemplate.exchange(holder.getNotificationUrl(), HttpMethod.POST, entity, String.class);
 
             return responseEntity.getStatusCode() == HttpStatus.OK;
-        } catch (JsonProcessingException | RestClientException e) {
+        } catch (Exception e) {
             logger.error("Error sending webhook {}", holder, e);
             return false;
         }

@@ -6,13 +6,13 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SheduledWebhookSender {
+public class ScheduledWebhookSender {
 
-    private static final Logger log = LoggerFactory.getLogger(SheduledWebhookSender.class);
+    private static final Logger log = LoggerFactory.getLogger(ScheduledWebhookSender.class);
 
     private WebhookSender sender;
 
-    public SheduledWebhookSender(WebhookSender sender) {
+    public ScheduledWebhookSender(WebhookSender sender) {
         this.sender = sender;
     }
 
