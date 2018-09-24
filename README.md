@@ -12,7 +12,7 @@ The TestPay Sandbox
 # Additional
 1. Payer e-mail is used as secret for sha2 signature for webhook
 
-2. Sample authorization request
+2. Sample authorization request \
    curl -v https://api.testpay.com/oauth2/token \\ \
 -H "Accept: application/json" \\ \
 -H "Accept-Language: en_US" \\ \
