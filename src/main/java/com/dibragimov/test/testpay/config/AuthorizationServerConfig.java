@@ -1,6 +1,7 @@
 package com.dibragimov.test.testpay.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -16,6 +17,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Value("${app.username}")
+    private String userName;
+    @Value("${app.password}")
+    private String userPassword;
+
     @Override
     public void configure(final AuthorizationServerSecurityConfigurer security) throws Exception {
         security
@@ -27,8 +33,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
         clients
                 .inMemory()
-                .withClient("user")
-                .secret("{noop}password")
+                .withClient(userName)
+                .secret("{noop}" +  userPassword)
                 .autoApprove(true)
                 .authorizedGrantTypes("authorization_code", "client_credentials", "password", "refresh_token")
                 .scopes("read", "write");
