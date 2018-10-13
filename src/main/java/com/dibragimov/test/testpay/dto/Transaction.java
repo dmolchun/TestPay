@@ -1,6 +1,5 @@
 package com.dibragimov.test.testpay.dto;
 
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
