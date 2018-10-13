@@ -37,7 +37,7 @@ public class PaymentController {
     public PaymentResponse makePayment(@RequestBody Payment payment) {
         logger.info("Make payment request {}", payment);
         WebhookHolder holder = buildWebhook(payment);
-        sender.sendWebhook(holder);
+        sender.sendWebhookAsync(holder);
         return new PaymentResponse(holder.getId(), getFormattedNow(), State.CREATED);
     }
 
